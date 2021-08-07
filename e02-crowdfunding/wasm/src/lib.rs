@@ -1,5 +1,5 @@
 
 #![no_std]
 
-pub use 02_crowfunding::*;
+pub use e02_crowdfunding::*;
 pub use elrond_wasm_output::*;

@@ -23,7 +23,7 @@
             "txId": "deploy",
             "tx": {
                 "from": "address:my_address",
-                "contractCode": "file:../output/02-crowfunding.wasm",
+                "contractCode": "file:../output/e02-crowdfunding.wasm",
                 "value": "0",
                 "arguments": [
                     "500,000,000,000",
@@ -54,7 +54,7 @@
                         "''target": "500,000,000,000",
                         "''deadline": "123,000"
                     },
-                    "code": "file:../output/02-crowfunding.wasm"
+                    "code": "file:../output/e02-crowdfunding.wasm"
                 }
             }
         }

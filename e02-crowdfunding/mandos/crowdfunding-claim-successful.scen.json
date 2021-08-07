@@ -21,7 +21,7 @@
             "tx": {
                 "from": "address:donor2",
                 "to": "address:the_crowdfunding_contract",
-                "value": "200,000,000,000",
+                "value": "250,000,000,000",
                 "function": "fund",
                 "arguments": [],
                 "gasLimit": "100,000,000",
@@ -48,20 +48,20 @@
                 },
                 "address:donor2": {
                     "nonce": "1",
-                    "balance": "800,000,000,000",
+                    "balance": "750,000,000,000",
                     "storage": {}
                 },
                 "address:the_crowdfunding_contract": {
                     "nonce": "0",
-                    "balance": "450,000,000,000",
+                    "balance": "500,000,000,000",
                     "storage": {
                         "''owner": "address:my_address",
                         "''target": "500,000,000,000",
                         "''deadline": "123,000",
                         "''deposit|address:donor1": "250,000,000,000",
-                        "''deposit|address:donor2": "200,000,000,000"
+                        "''deposit|address:donor2": "250,000,000,000"
                     },
-                    "code": "file:../output/02-crowfunding.wasm"
+                    "code": "file:../output/e02-crowdfunding.wasm"
                 }
             }
         },
@@ -73,7 +73,7 @@
         },
         {
             "step": "scCall",
-            "txId": "claim-donor1",
+            "txId": "claim-donor",
             "tx": {
                 "from": "address:donor1",
                 "to": "address:the_crowdfunding_contract",
@@ -84,16 +84,17 @@
                 "gasPrice": "0"
             },
             "expect": {
-                "status": "0",
+                "message": "str:only owner can claim successful funding",
+                "status": "4",
                 "gas": "*",
                 "refund": "*"
             }
         },
         {
             "step": "scCall",
-            "txId": "claim-donor2",
+            "txId": "claim-owner",
             "tx": {
-                "from": "address:donor2",
+                "from": "address:my_address",
                 "to": "address:the_crowdfunding_contract",
                 "value": "0",
                 "function": "claim",
@@ -111,18 +112,18 @@
             "step": "checkState",
             "accounts": {
                 "address:my_address": {
-                    "nonce": "1",
-                    "balance": "1,000,000",
+                    "nonce": "2",
+                    "balance": "500,001,000,000",
                     "storage": {}
                 },
                 "address:donor1": {
                     "nonce": "2",
-                    "balance": "400,000,000,000",
+                    "balance": "150,000,000,000",
                     "storage": {}
                 },
                 "address:donor2": {
-                    "nonce": "2",
-                    "balance": "1,000,000,000,000",
+                    "nonce": "1",
+                    "balance": "750,000,000,000",
                     "storage": {}
                 },
                 "address:the_crowdfunding_contract": {
@@ -132,10 +133,10 @@
                         "''owner": "address:my_address",
                         "''target": "500,000,000,000",
                         "''deadline": "123,000",
-                        "''deposit|address:donor1": "0",
-                        "''deposit|address:donor2": "0"
+                        "''deposit|address:donor1": "250,000,000,000",
+                        "''deposit|address:donor2": "250,000,000,000"
                     },
-                    "code": "file:../output/02-crowfunding.wasm"
+                    "code": "file:../output/e02-crowdfunding.wasm"
                 }
             }
         }

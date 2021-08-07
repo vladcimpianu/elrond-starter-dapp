@@ -1,5 +1,5 @@
 [package]
-name = "02-crowfunding-wasm"
+name = "e02-crowdfunding-wasm"
 version = "0.0.0"
 authors = [ "you",]
 edition = "2018"
@@ -20,7 +20,7 @@ lto = true
 debug = false
 panic = "abort"
 
-[dependencies.02-crowfunding]
+[dependencies.e02-crowdfunding]
 features = [ "wasm-output-mode",]
 default-features = false
 path = ".."

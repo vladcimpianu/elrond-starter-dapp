@@ -1,5 +1,5 @@
 [package]
-name = "02-crowfunding"
+name = "e02-crowdfunding"
 version = "0.0.0"
 authors = [ "you",]
 edition = "2018"

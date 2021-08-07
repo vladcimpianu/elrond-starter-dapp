@@ -1,34 +1,31 @@
 {
-    "name": "crowdfunding funding",
+    "name": "trying to fund one block too late",
     "steps": [
         {
             "step": "externalSteps",
-            "path": "crowdfunding-init.scen.json"
+            "path": "crowdfunding-fund.scen.json"
         },
         {
             "step": "setState",
-            "accounts": {
-                "address:donor1": {
-                    "nonce": "0",
-                    "balance": "400,000,000,000",
-                    "storage": {}
-                }
+            "currentBlockInfo": {
+                "blockNonce": "123,001"
             }
         },
         {
             "step": "scCall",
-            "txId": "fund-1",
+            "txId": "fund-too-late",
             "tx": {
                 "from": "address:donor1",
                 "to": "address:the_crowdfunding_contract",
-                "value": "250,000,000,000",
+                "value": "10,000,000,000",
                 "function": "fund",
                 "arguments": [],
                 "gasLimit": "100,000,000",
                 "gasPrice": "0"
             },
             "expect": {
-                "status": "",
+                "status": "4",
+                "message": "str:cannot fund after deadline",
                 "gas": "*",
                 "refund": "*"
             }
@@ -42,7 +39,7 @@
                     "storage": {}
                 },
                 "address:donor1": {
-                    "nonce": "1",
+                    "nonce": "*",
                     "balance": "150,000,000,000",
                     "storage": {}
                 },
@@ -55,8 +52,29 @@
                         "''deadline": "123,000",
                         "''deposit|address:donor1": "250,000,000,000"
                     },
-                    "code": "file:../output/02-crowfunding.wasm"
+                    "code": "file:../output/e02-crowdfunding.wasm"
                 }
+            }
+        },
+        {
+            "step": "scCall",
+            "txId": "check-status",
+            "tx": {
+                "from": "address:donor1",
+                "to": "address:the_crowdfunding_contract",
+                "value": "0",
+                "function": "status",
+                "arguments": [],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "2"
+                ],
+                "status": "0",
+                "gas": "*",
+                "refund": "*"
             }
         }
     ]
